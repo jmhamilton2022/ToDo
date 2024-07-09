@@ -1,0 +1,58 @@
+﻿@model IEnumerable<ToDoList.Models.Ticket>
+
+<div class="row">
+    <div class="col-md-2">
+        <form asp-action="Filter" method="post">
+            <div class="mb-3">
+                <label class="form-label">Status:</label>
+                <select name="filter" class="form-select">
+                    <option value="all">All</option>
+                    @foreach (var status in ViewBag.Statuses)
+                    {
+                        <option value="@status.StatusId" selected="@(status.StatusId == ViewBag.Filters.StatusId)">@status.Name</option>
+                    }
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Filter</button>
+            <a asp-action="Index" class="btn btn-primary">Clear</a>
+        </form>
+    </div>
+    <div class="col-md-10">
+        <form asp-action="MarkComplete" method="post" asp-route-id="@ViewBag.Filters.FilterString">
+            <table class="table table-bordered table-striped mt-2">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>Sprint Number</th>
+                        <th>Point Value</th>
+                        <th>Status</th>
+                        <th class="w-25"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var ticket in Model)
+                    {
+                        <tr>
+                            <td>@ticket.Name</td>
+                            <td>@ticket.Description</td>
+                            <td>@ticket.SprintNumber</td>
+                            <td>@ticket.PointValue</td>
+                            <td>@ticket?.Status?.Name</td>
+                            <td>
+                                @if (ticket?.StatusId != "done")
+                                {
+                                    <button type="submit" class="btn btn-primary btn-sm" name="selected.Id" value="@ticket.Id">Mark Completed</button>
+                                }
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </form>
+        <form asp-action="DeleteComplete" method="post" asp-route-id="@ViewBag.Filters.FilterString">
+            <button type="submit" class="btn btn-primary">Delete completed tickets</button>
+        </form>
+        <a asp-action="Add" class="btn btn-primary">Add new ticket</a>
+    </div>
+</div>

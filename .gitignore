@@ -1,0 +1,27 @@
+# Ignore Visual Studio temporary files, build results, and
+# include the folder `.vs`
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Rider
+.idea/
+*.sln.iml
+
+# ASP.NET Core
+project.lock.json
+project.fragment.lock.json
+.nuget
+**/bin
+**/obj
+**/packages
+**/wwwroot/lib
+
+# Build Folders
+bin/
+obj/
+
+# Logs
+*.log
