@@ -10,8 +10,8 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<ToDoContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("ToDoContext")));
 
-var app = builder.Build();
 
+var app = builder.Build();
 
 if (!app.Environment.IsDevelopment())
 {
