@@ -6,9 +6,10 @@
         {
             FilterString = filterstring ?? "all-all-all";
             string[] filters = FilterString.Split('-');
-            CategoryId = filters[0];
-            Due = filters[1];
-            StatusId = filters[2];
+
+            CategoryId = filters.Length > 0 ? filters[0] : "all";
+            Due = filters.Length > 1 ? filters[1] : "all";
+            StatusId = filters.Length > 2 ? filters[2] : "all";
         }
 
         public string FilterString { get; }
